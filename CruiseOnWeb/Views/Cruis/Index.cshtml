@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CruiseOnWeb.Models.Cruis>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CruiseName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CruiseDepPortName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CruiseArrPortName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CruiseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CruiseDepPortName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CruiseArrPortName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CruiseId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CruiseId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CruiseId })
+        </td>
+    </tr>
+}
+
+</table>

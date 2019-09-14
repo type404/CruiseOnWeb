@@ -1,0 +1,51 @@
+﻿@model CruiseOnWeb.Models.Port
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Port</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PortName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PortName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PortLati)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PortLati)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PortLongi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PortLongi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PortCountry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PortCountry)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
