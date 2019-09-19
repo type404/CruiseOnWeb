@@ -18,8 +18,6 @@ namespace CruiseOnWeb.Models
         [Key]
         public int CruiseId { get; set; }
 
-        public int UsId { get; set; }
-
         [Required(ErrorMessage = "Please enter a cruise name.")]
         [Display(Name = "Cruise Name")]
         public string CruiseName { get; set; }
@@ -42,7 +40,5 @@ namespace CruiseOnWeb.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

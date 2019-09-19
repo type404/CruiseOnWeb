@@ -6,8 +6,10 @@ using System.Web.Mvc;
 
 namespace CruiseOnWeb.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
@@ -23,6 +25,14 @@ namespace CruiseOnWeb.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+
+        public ActionResult Bookings()
+        {
+            ViewBag.Message = "Your booking page!";
 
             return View();
         }

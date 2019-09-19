@@ -10,6 +10,7 @@ using CruiseOnWeb.Models;
 
 namespace CruiseOnWeb.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class PortsController : Controller
     {
         private CruiseOnWeb_Model db = new CruiseOnWeb_Model();

@@ -36,7 +36,7 @@
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.StartDate, "Please select a start date", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -44,7 +44,7 @@
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.EndDate, "Please select a end date", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -52,7 +52,9 @@
             @Html.LabelFor(model => model.NumberOfPeople, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.NumberOfPeople, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumberOfPeople, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.NumberOfPeople, "Please select the number of people", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NumberOfPeople, new{ htmlAttributes = new {title = "Enter the total number of travellers"}})
+
             </div>
         </div>
 

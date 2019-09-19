@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace CruiseOnWeb.Controllers
 {
+    [Authorize(Roles="Administrator")]
     public class UsersController : Controller
     {
         private CruiseOnWeb_Model db = new CruiseOnWeb_Model();
@@ -86,8 +87,12 @@ namespace CruiseOnWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Country,UserId")] User user)
         {
+            user.UserId = User.Identity.GetUserId();
+            ModelState.Clear();
+            TryValidateModel(user);
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;

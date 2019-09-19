@@ -30,12 +30,6 @@ namespace CruiseOnWeb.Models
                 .WithRequired(e => e.User)
                 .HasForeignKey(e => e.UsId)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Cruises)
-                .WithRequired(e => e.User)
-                .HasForeignKey(e => e.UsId)
-                .WillCascadeOnDelete(false);
         }
     }
 }
