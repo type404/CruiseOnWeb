@@ -27,10 +27,12 @@ namespace CruiseWeb.Models
 
         [Required(ErrorMessage = "Please enter the cost per night.")]
         [Display(Name = "Cost")]
+        [Range(0,1000, ErrorMessage ="Cost limit per night should be 0 to 1000.")]
         public double CostPerNight { get; set; }
 
         [Required(ErrorMessage = "Please enter the cruise duration.")]
         [Display(Name = "Duration")]
+        [Range(1, 10, ErrorMessage = "Cruise duration should be between 1 - 10 days.")]
         public int Duration { get; set; }
     }
 }

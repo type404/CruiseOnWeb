@@ -58,11 +58,11 @@ namespace CruiseWeb
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "29693494711-g4399v7jaqphlhuv0qq1efgb5g4pojl1.apps.googleusercontent.com",
+                ClientSecret = "Mshuj-LuduZBN3DpcDaBhHce"
+            });
         }
     }
 }
