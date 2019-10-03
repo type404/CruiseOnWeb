@@ -1,8 +1,13 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    
 }
-
+/*image {
+    background-image: url(Images/background.jpg);
+    min-height:inherit;
+    min-width:inherit;
+}*/
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -21,4 +26,11 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+.logo-image {
+    background: url(Images/logo.png) no-repeat top left;
+    display: inline-block;
+    min-width:100%;
+    min-height: 100%;
+    text-indent: -9999px; /* hides the link text */
 }
