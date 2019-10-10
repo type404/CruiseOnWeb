@@ -25,6 +25,11 @@ namespace CruiseWeb
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-flatly.css",
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                "~/Scripts/DataTables/jquery.dataTables.js", "~/Scripts/DataTables/dataTables.bootstrap.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/mapbox").Include(
+                "~/Scripts/location.js"));
         }
     }
 }

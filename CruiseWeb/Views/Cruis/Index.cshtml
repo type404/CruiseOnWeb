@@ -4,64 +4,79 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <h2>Index</h2>
-
+<div id="map" style="height:300px"></div>
+<br />
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CruiseName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CruiseDepPortName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CruiseArrPortName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CostPerNight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duration)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CruiseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CruiseDepPortName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CruiseArrPortName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostPerNight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CruiseId })
-                }
-                |@Html.ActionLink("Details", "Details", new { id = item.CruiseId }) |
-                @if (User.IsInRole("Admin"))
-                {
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CruiseId })
-                }
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.CruiseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CruiseDepPortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CruiseArrPortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostPerNight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="coordinates">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CruiseName)
+                </td>
+                <td class="portName">
+                    @Html.DisplayFor(modelItem => item.CruiseDepPortName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CruiseArrPortName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CostPerNight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CruiseId })
+                    }
+                    |@Html.ActionLink("Details", "Details", new { id = item.CruiseId }) |
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CruiseId })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+@section Scripts{
+    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
+    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    <script>
+        $(Document).ready(function () {
+            $('.table').DataTable();
+        });
+    </script>
+    @Scripts.Render("~/bundles/mapbox")
+    }
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
