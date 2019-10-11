@@ -19,5 +19,7 @@ namespace CruiseWeb.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }
+
+        public System.Data.Entity.DbSet<CruiseWeb.Models.Image> Images { get; set; }
     }
 }

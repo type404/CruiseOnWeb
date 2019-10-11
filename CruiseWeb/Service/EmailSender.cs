@@ -1,4 +1,5 @@
-﻿using SendGrid;
+﻿using Microsoft.Security.Application;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,10 @@ namespace CruiseWeb.Service
             var from = new EmailAddress("noreply@cruiseonweb.com", "CruiseOnWeb");
             var to = new EmailAddress(toEmail, "");
             var plainTextContent = contents;
-            var htmlContent = "<p>" + contents + "</p>";
+            /*//Helps prevent XSS attack using HTML
+            var sanitizedContent = Sanitizer.GetSafeHtml(plainTextContent);
+            var htmlContent = "<p>" + sanitizedContent + "</p>";       */
+            var htmlContent = "<p>" + plainTextContent + "</p>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             const string Filename = "C:/Users/tisa9/source/repos/CruiseOnWeb/CruiseWeb/Content/Images/Discount.JPG";
             var bytes = File.ReadAllBytes(Filename);
@@ -32,8 +36,6 @@ namespace CruiseWeb.Service
             msg.AddAttachment("discount.jpg",file);
             var response = client.SendEmailAsync(msg);
         }
-
-        
-
+    
     }
 }

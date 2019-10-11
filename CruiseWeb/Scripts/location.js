@@ -7,21 +7,36 @@
 */
 const TOKEN = "pk.eyJ1IjoidG0wNzEzIiwiYSI6ImNrMWQ3bnhxdzA1Y2UzaG51NmhvamkxNTMifQ.LOChEHSX_jHKaXLJdE5mAw";
 var locations = [];
+var latitude;
+var longitude;
+var port;
+
 // The first step is obtain all the latitude and longitude from the HTML
 // The below is a simple jQuery selector
 $(".coordinates").each(function () {
-    var port = $(".portName", this).text().trim();
-    var jsonO = JSON.parse($.getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/" + port + ".json?access_token=pk.eyJ1IjoidG0wNzEzIiwiYSI6ImNrMWQ3bnhxdzA1Y2UzaG51NmhvamkxNTMifQ.LOChEHSX_jHKaXLJdE5mAw"))
-
+    var description = $(".cruiseName", this).text().trim();
+    port = $(".portName", this).text().trim();
     // Create a point data structure to hold the values.
-    var point = {
+    var point = fetchJSON(port).then({
         "latitude": latitude,
         "longitude": longitude,
         "description": description
-    };
+    });
     // Push them all into an array.
     locations.push(point);
 });
+console.log("locations:", locations);
+    async function fetchJSON(port) {
+    var urlPort = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + port + ".json?access_token=pk.eyJ1IjoidG0wNzEzIiwiYSI6ImNrMWQ3bnhxdzA1Y2UzaG51NmhvamkxNTMifQ.LOChEHSX_jHKaXLJdE5mAw"
+/*        console.log(urlPort);*/
+        $.getJSON(urlPort).done(function (data) {
+          /*  console.log("data",data);*/
+        latitude = `${data.features[0].center[0]}`;
+        longitude = `${data.features[0].center[1]}`;
+        /*        console.log(latitude, longitude);*/
+            return (latitude, longitude);
+});
+}
 var data = [];
 for (i = 0; i < locations.length; i++) {
     var feature = {
@@ -38,10 +53,12 @@ for (i = 0; i < locations.length; i++) {
     data.push(feature)
 }
 mapboxgl.accessToken = TOKEN;
+console.log("Hey");
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
     zoom: 11,
+    minzoom: 0,
     center: [locations[0].longitude, locations[0].latitude]
 });
 map.on('load', function () {

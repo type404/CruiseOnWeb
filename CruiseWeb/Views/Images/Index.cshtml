@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CruiseWeb.Models.Image>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Image Gallery</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+<!--<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-3">
+        <p>
+            @Html.DisplayNameFor(model => model.Path)
+        </p>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-3">
+        <p>
+            @Html.DisplayNameFor(model => model.Name)
+        </p>
+    </div>
+    -->
+    <!-- Wrapper for slides -->
+    
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3">
+                <div class="col-item">
+                    <div class="photo">
+                        <img src="@Url.Content("~/Uploads/"+item.Path)"
+                             class="img-responsive" alt="a" />
+                    </div>
+                    <div class="info">
+                        <div class="row">
+                            <div class="price col-md-12">
+                                <h5>
+                                    @item.Name
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>

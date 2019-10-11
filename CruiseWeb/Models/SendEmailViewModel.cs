@@ -19,6 +19,7 @@ namespace CruiseWeb.Models
 
         [Required(ErrorMessage = "Please enter the contents")]
         [AllowHtml]
+
         public string Contents { get; set; }
     }
 }

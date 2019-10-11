@@ -8,7 +8,7 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<h2>Index</h2>
+<h2>Our Cruises</h2>
 <div id="map" style="height:300px"></div>
 <br />
 <p>
@@ -39,7 +39,7 @@
         @foreach (var item in Model)
         {
             <tr class="coordinates">
-                <td>
+                <td class="cruiseName">
                     @Html.DisplayFor(modelItem => item.CruiseName)
                 </td>
                 <td class="portName">
