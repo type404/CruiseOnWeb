@@ -16,19 +16,6 @@ namespace CruiseWeb.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
         public ActionResult Send_Email()
         {
             return View(new SendEmailViewModel());
@@ -41,12 +28,12 @@ namespace CruiseWeb.Controllers
             {
                 try
                 {
-                    String toEmail = model.ToEmail;
+                    //String toEmail = model.ToEmail;
                     String subject = model.Subject;
                     String contents = model.Contents;
 
                     EmailSender es = new EmailSender();
-                    es.Send(toEmail, subject, contents);
+                    es.Send(subject, contents);
 
                     ViewBag.Result = "Email has been send.";
 
