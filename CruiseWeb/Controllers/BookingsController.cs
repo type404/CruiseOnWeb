@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CruiseWeb.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CruiseWeb.Controllers
 {
@@ -14,7 +15,7 @@ namespace CruiseWeb.Controllers
     public class BookingsController : Controller
     {
         private Cruise_Models db = new Cruise_Models();
-        
+
         // GET: Bookings
         public ActionResult Index()
         {
@@ -49,6 +50,12 @@ namespace CruiseWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BookingId,Username,CruiseName,StartDate,EndDate,NumberOfPeople,TotalPrice")] Booking booking)
         {
+            var context = new Cruise_Models();
+            var tempDuration = (from c in context.Cruises where c.CruiseName == booking.CruiseName select c.Duration).Single();
+            var tempCostNight = (from c in context.Cruises where c.CruiseName == booking.CruiseName select c.CostPerNight).Single();
+            booking.Username = User.Identity.GetUserName();
+            booking.EndDate = booking.StartDate.AddDays(Convert.ToDouble(tempDuration));
+            booking.TotalPrice = booking.NumberOfPeople * Convert.ToInt32(tempCostNight);
             if (ModelState.IsValid)
             {
                 db.Bookings.Add(booking);
