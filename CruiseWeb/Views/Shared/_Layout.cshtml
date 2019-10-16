@@ -11,6 +11,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="https://kit.fontawesome.com/c99eafe8da.js" crossorigin="anonymous"></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.css' rel='stylesheet' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.js'></script>
 
@@ -38,6 +39,7 @@
                         <li>@Html.ActionLink("Bookings", "Index", "Bookings")</li>
                         <li>@Html.ActionLink("Cruises", "Index", "Cruis")</li>
                         <li>@Html.ActionLink("Profiles", "Index", "Profiles")</li>
+                        <li>@Html.ActionLink("Ratings", "Create", "Ratings")</li>
                         if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Send Promotional Email", "Send_Email", "Home")</li>

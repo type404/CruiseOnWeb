@@ -21,5 +21,7 @@ namespace CruiseWeb.Models
         }
 
         public System.Data.Entity.DbSet<CruiseWeb.Models.Image> Images { get; set; }
+
+        public System.Data.Entity.DbSet<CruiseWeb.Models.Rating> Ratings { get; set; }
     }
 }
