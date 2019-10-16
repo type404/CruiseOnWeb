@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace CruiseWeb.Controllers
 {
@@ -48,6 +51,42 @@ namespace CruiseWeb.Controllers
             }
             return View();
         }
+        [HttpPost]
+        public JsonResult AjaxMethod()
+        {
+            string query = "SELECT CostPerNight, Duration, CruiseDepPortName";
+            query += " FROM Cruises";
+            string constr = ConfigurationManager.ConnectionStrings["Rating"].ConnectionString;
+            List<object> chartData = new List<object>();
+            chartData.Add(new object[]
+                            {
+                            "CruiseDepPortName", "CostPerNight","Duration"
+                            });
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand(query))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        while (sdr.Read())
+                        {
+                            chartData.Add(new object[]
+                            {
+                            sdr["CruiseDepPortName"],sdr["CostPerNight"],sdr["Duration"]
+                            });
+                        }
+                    }
+
+                    con.Close();
+                }
+            }
+
+            return Json(chartData);
+        }
     }
+
 }
    
