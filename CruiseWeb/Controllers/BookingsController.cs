@@ -19,7 +19,9 @@ namespace CruiseWeb.Controllers
         // GET: Bookings
         public ActionResult Index()
         {
-            return View(db.Bookings.ToList());
+            var userName = User.Identity.GetUserName();
+            var customers = db.Bookings.Where(u => u.Username == userName).ToList();
+            return View(customers);
         }
 
         // GET: Bookings/Details/5
@@ -40,6 +42,8 @@ namespace CruiseWeb.Controllers
         // GET: Bookings/Create
         public ActionResult Create()
         {
+            //var userName = User.Identity.GetUserName();
+            //var customers = db.Bookings.Where(u => u.Username == userName).ToList();
             return View();
         }
 

@@ -2,14 +2,16 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron image">
-    <h1>Book Your Dream Cruise Holiday!</h1>
-    <p class="lead">
-        You can search through our various cruise holidays available in Asia-Pacific ranging from
-        two days to ten days.
-    </p>
-    <p><a href="~/Cruis" class="btn btn-primary btn-lg">Find more here! &raquo;</a></p>
-</div>
+    <div class="jumbotron image">
+        <section class="text-banner">
+            <h1>Book Your Dream Cruise Holiday!</h1>
+            <p class="lead">
+                You can search through our various cruise holidays available in Asia-Pacific ranging from
+                two days to ten days.
+            </p>
+        </section>
+        <p><a href="~/Cruis" class="btn btn-primary btn-lg">Find more here! &raquo;</a></p>
+    </div>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -31,6 +33,13 @@
                 };
                 var chart = new google.visualization.BubbleChart($("#chart")[0]);
                 chart.draw(data, options);
+
+                google.visualization.events.addListener(chart, 'click', selectHandler);
+
+                function selectHandler(e) {
+                    alert("Click Ok to login and book your cruise today!")
+                    location.href = '/Account/Login'
+                }
             },
             failure: function (r) {
                 alert(r.d);
@@ -41,5 +50,6 @@
         });
     }
 </script>
-<div class ="jumbotron image align-center" id="chart" style="width: 700px; height: 700px;">
+<div class ="jumbotron homeChart" id="chart" style="width: 700px; height: 700px;">
+    
 </div>

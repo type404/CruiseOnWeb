@@ -405,6 +405,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Images\background.jpg" />
     <Content Include="Content\Images\Discount.JPG" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="favicon.ico" />

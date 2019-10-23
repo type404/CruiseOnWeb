@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CruiseWeb.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CruiseWeb.Controllers
 {
+    [Authorize]
     public class RatingsController : Controller
     {
         private Cruise_Models db = new Cruise_Models();
