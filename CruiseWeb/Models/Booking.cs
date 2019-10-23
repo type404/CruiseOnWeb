@@ -28,7 +28,7 @@ namespace CruiseWeb.Models
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "Please enter the total number of people.")]
-        [Range(1, 100, ErrorMessage = "Please select the number of people between 1-100.")]
+        [Range(1, 10, ErrorMessage = "Please select the number of people between 1-10.")]
         public int NumberOfPeople { get; set; }
 
 /*        [Required]

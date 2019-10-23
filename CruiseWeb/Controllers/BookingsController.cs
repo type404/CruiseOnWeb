@@ -50,6 +50,16 @@ namespace CruiseWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BookingId,Username,CruiseName,StartDate,EndDate,NumberOfPeople,TotalPrice")] Booking booking)
         {
+            if (DateTime.Compare(booking.StartDate, DateTime.UtcNow) < 0)
+            {
+                TempData["ErrorMessageDate"] = "Please check the date and retry!";
+                return RedirectToAction("Create");
+            }
+            if (booking.NumberOfPeople < 1 || booking.NumberOfPeople > 10)
+            {
+                TempData["ErrorMessagePeople"] = "Enter people between 1-10!";
+                return RedirectToAction("Create");
+            }
             var context = new Cruise_Models();
             var tempDuration = (from c in context.Cruises where c.CruiseName == booking.CruiseName select c.Duration).Single();
             var tempCostNight = (from c in context.Cruises where c.CruiseName == booking.CruiseName select c.CostPerNight).Single();
