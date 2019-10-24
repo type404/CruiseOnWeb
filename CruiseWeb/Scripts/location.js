@@ -26,8 +26,10 @@ $(".coordinates").each(function () {
         }
         locations.push(point)
     })
-    // Push them all into an array.
+    
+        // Push them all into an array.
 });
+
 var data = [];
 for (i = 0; i < locations.length; i++) {
     var feature = {
@@ -44,9 +46,10 @@ for (i = 0; i < locations.length; i++) {
     data.push(feature)
 }
 mapboxgl.accessToken = TOKEN;
-console.log(locations);
-console.log(locations[1]);
-var map = new mapboxgl.Map({
+//console.log(locations);
+//console.log(locations[0].longitude);
+
+var map = new mapboxgl.Map({    
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
     zoom: 11,

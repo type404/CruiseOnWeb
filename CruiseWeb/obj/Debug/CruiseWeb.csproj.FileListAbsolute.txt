@@ -215,3 +215,4 @@ C:\Users\tisa9\source\repos\CruiseOnWeb\CruiseWeb\bin\HtmlSanitizationLibrary.dl
 C:\Users\tisa9\source\repos\CruiseOnWeb\CruiseWeb\bin\AntiXssLibrary.xml
 C:\Users\tisa9\source\repos\CruiseOnWeb\CruiseWeb\bin\HtmlSanitizationLibrary.xml
 C:\Users\tisa9\source\repos\CruiseOnWeb\CruiseWeb\obj\Debug\CruiseWeb.csprojAssemblyReference.cache
+C:\Users\tisa9\source\repos\CruiseOnWeb\CruiseWeb\bin\SRVTextToImage.dll

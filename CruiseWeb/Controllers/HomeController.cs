@@ -86,6 +86,7 @@ namespace CruiseWeb.Controllers
 
             return Json(chartData);
         }
+
     }
 
 }

@@ -19,9 +19,7 @@ namespace CruiseWeb.Controllers
         // GET: Bookings
         public ActionResult Index()
         {
-            var userName = User.Identity.GetUserName();
-            var customers = db.Bookings.Where(u => u.Username == userName).ToList();
-            return View(customers);
+            return View(db.Bookings.ToList());
         }
 
         // GET: Bookings/Details/5
@@ -52,6 +50,7 @@ namespace CruiseWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+         [ValidateGoogleCaptcha]
         public ActionResult Create([Bind(Include = "BookingId,Username,CruiseName,StartDate,EndDate,NumberOfPeople,TotalPrice")] Booking booking)
         {
             if (DateTime.Compare(booking.StartDate, DateTime.UtcNow) < 0)
