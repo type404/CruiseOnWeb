@@ -19,7 +19,15 @@ namespace CruiseWeb.Controllers
         // GET: Bookings
         public ActionResult Index()
         {
-            return View(db.Bookings.ToList());
+            if (User.IsInRole("Customer")){
+             var userName = User.Identity.GetUserName();
+             var customers = db.Bookings.Where(u => u.Username == userName).ToList();
+            return View(customers);
+            } else
+            {
+                return View(db.Bookings.ToList());
+            }
+
         }
 
         // GET: Bookings/Details/5
@@ -40,8 +48,9 @@ namespace CruiseWeb.Controllers
         // GET: Bookings/Create
         public ActionResult Create()
         {
-            //var userName = User.Identity.GetUserName();
-            //var customers = db.Bookings.Where(u => u.Username == userName).ToList();
+            var context = new Cruise_Models();
+            var cruiseName = (from c in context.Cruises select c.CruiseName).ToList();
+            ViewBag.CruiseNames = new SelectList(cruiseName);
             return View();
         }
 
@@ -50,9 +59,10 @@ namespace CruiseWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-         [ValidateGoogleCaptcha]
+        [ValidateGoogleCaptcha]
         public ActionResult Create([Bind(Include = "BookingId,Username,CruiseName,StartDate,EndDate,NumberOfPeople,TotalPrice")] Booking booking)
         {
+            booking.CruiseName = Request["CruiseName"].ToString();
             if (DateTime.Compare(booking.StartDate, DateTime.UtcNow) < 0)
             {
                 TempData["ErrorMessageDate"] = "Please check the date and retry!";

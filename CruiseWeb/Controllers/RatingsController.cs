@@ -19,7 +19,18 @@ namespace CruiseWeb.Controllers
         // GET: Ratings
         public ActionResult Index()
         {
-            return View(db.Ratings.ToList());
+            if (User.IsInRole("Customer"))
+            {
+                var userName = User.Identity.GetUserName();
+                var context = new Cruise_Models();
+                var bookingId = (from c in context.Bookings join r in context.Ratings on c.BookingId equals r.BookingId
+                                 where c.Username == userName select r.BookingId).ToList();
+                return View(bookingId);
+            }
+            else
+            {
+                return View(db.Ratings.ToList());
+            }
         }
 
         // GET: Ratings/Details/5
@@ -40,7 +51,10 @@ namespace CruiseWeb.Controllers
         // GET: Ratings/Create
         public ActionResult Create()
         {
-            
+            var context = new Cruise_Models();
+            var userName = User.Identity.GetUserName();
+            var bookingId = (from c in context.Bookings where c.Username == userName select c.BookingId).ToList();
+            ViewBag.BookingId = new SelectList(bookingId);
             return View();
         }
 
@@ -51,6 +65,7 @@ namespace CruiseWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "RatingId,Rating1,BookingId,Comments")] Rating rating)
         {
+            rating.BookingId = Convert.ToInt32(Request["BookingId"]);
             if (ModelState.IsValid)
             {
                 db.Ratings.Add(rating);

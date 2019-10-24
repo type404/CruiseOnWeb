@@ -27,9 +27,9 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CruiseName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-
-            @Html.EditorFor(model => model.CruiseName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CruiseName, "", new { @class = "text-danger" })
+            @Html.DropDownList("CruiseName",ViewBag.CruiseNames as SelectList)
+            @*@Html.EditorFor(model => model.CruiseName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CruiseName, "", new { @class = "text-danger" })*@
         </div>
     </div>
 
@@ -66,6 +66,7 @@
                 @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
             </div>
         </div>*@
+    @* Reference used to create captcha https://medium.com/@MoienTajik/google-recaptcha-in-asp-net-mvc-cf88b079dde*@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             @Html.GoogleCaptcha()
