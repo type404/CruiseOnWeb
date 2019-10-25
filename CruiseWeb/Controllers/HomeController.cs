@@ -23,7 +23,7 @@ namespace CruiseWeb.Controllers
         {
             return View(new SendEmailViewModel());
         }
-
+/*Used to send bulk emails by the admin to all the users in the database*/
         [HttpPost]
         public ActionResult Send_Email(SendEmailViewModel model)
         {
@@ -51,6 +51,7 @@ namespace CruiseWeb.Controllers
             }
             return View();
         }
+/*Display chart in the home controller as a bubble chart*/
         [HttpPost]
         public JsonResult AjaxMethod()
         {

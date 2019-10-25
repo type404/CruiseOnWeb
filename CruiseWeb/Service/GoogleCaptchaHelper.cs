@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
-
+/*Display correct captcha*/
+/*Reference used to create captcha https://medium.com/@MoienTajik/google-recaptcha-in-asp-net-mvc-cf88b079dde */
 public static class GoogleCaptchaHelper
 {
     public static IHtmlString GoogleCaptcha(this HtmlHelper helper)

@@ -24,7 +24,8 @@ namespace CruiseWeb.Models
 
 /*        [Required(ErrorMessage = "Please enter end date.")]
         [Column(TypeName = "date")]
-        [DataType(DataType.Date)]*/
+        [DataType(DataType.Date)]
+        */
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = "Please enter the total number of people.")]

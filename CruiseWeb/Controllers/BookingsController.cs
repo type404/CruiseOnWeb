@@ -17,6 +17,7 @@ namespace CruiseWeb.Controllers
         private Cruise_Models db = new Cruise_Models();
 
         // GET: Bookings
+        //Shows only the bookings of the logged in users
         public ActionResult Index()
         {
             if (User.IsInRole("Customer")){
@@ -57,6 +58,8 @@ namespace CruiseWeb.Controllers
         // POST: Bookings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //Lets the user select the cruise name and enter bookings date and calculates the rest of the things 
+        //based on available information.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateGoogleCaptcha]

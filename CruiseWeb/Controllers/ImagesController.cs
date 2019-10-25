@@ -45,6 +45,7 @@ namespace CruiseWeb.Controllers
         // POST: Images/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+/*Lets the admin upload files to the database as cruise images*/
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Image image, HttpPostedFileBase postedFile)

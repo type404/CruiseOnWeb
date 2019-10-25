@@ -5,30 +5,45 @@
 *
 * @author Jian Liew <jian.liew@monash.edu>
 */
+
 const TOKEN = "pk.eyJ1IjoidG0wNzEzIiwiYSI6ImNrMWQ3bnhxdzA1Y2UzaG51NmhvamkxNTMifQ.LOChEHSX_jHKaXLJdE5mAw";
+var initialLocations = [];
 var locations = [];
+
+var port;
 // The first step is obtain all the latitude and longitude from the HTML
 // The below is a simple jQuery selector
 $(".coordinates").each(function () {
     var description = $(".cruiseName", this).text().trim();
-    var port = $(".portName", this).text().trim();
+    port = $(".portName", this).text().trim();
     var urlPort = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + port + ".json?access_token=pk.eyJ1IjoidG0wNzEzIiwiYSI6ImNrMWQ3bnhxdzA1Y2UzaG51NmhvamkxNTMifQ.LOChEHSX_jHKaXLJdE5mAw"
-    // Create a point data structure to hold the values.
     var point;
+    // Create a point data structure to hold the values.
     fetch(urlPort).then(async (response) => {
         var portJson = await response.json();
         //console.log(portJson);
         point = {
-            "latitude": parseFloat(portJson.features[0].center[1]),
-            "longitude": parseFloat(portJson.features[0].center[0]),
+            "latitude": portJson.features[0].center[1],
+            "longitude": portJson.features[0].center[0],
             "description": description
             // Push them all into an array.
         }
-        locations.push(point)
+
+        initialLocations.push(point);
     })
-    
-        // Push them all into an array.
+    locations = [{ "latitude": 36.99472, "longitude": 127.08889, "description": "Horizon" },
+        { "latitude": 35.68, "longitude": 139.77, "description": "Island Sky" },
+        { "latitude": 43.11667, "longitude": 131.9, "description": "Kristina Regina" },
+        { "latitude": -12.4604, "longitude": 130.841, "description": "Majesty of the Seas" },
+        { "latitude": 35.68, "longitude": 139.77, "description": "Land Cruise" },
+        { "latitude": -12.679347499, "longitude": 141.924, "description": "Mariner of the Seas" },
+        { "latitude": 13.75, "longitude": 100.51667, "description": "Oceana" },
+        { "latitude": -44.4, "longitude": 171.25, "description": "Regatta" },
+        { "latitude": -37.8142, "longitude": 144.9632, "description": "Golden Princess" },
+        { "latitude": -33.868, "longitude": 151.21, "description": "Sea Princess" }];
 });
+console.log(locations);
+console.log(initialLocations);
 
 var data = [];
 for (i = 0; i < locations.length; i++) {
@@ -46,14 +61,11 @@ for (i = 0; i < locations.length; i++) {
     data.push(feature)
 }
 mapboxgl.accessToken = TOKEN;
-//console.log(locations);
-//console.log(locations[0].longitude);
-
-var map = new mapboxgl.Map({    
+var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
     zoom: 11,
-    //center: [locations[0].longitude, locations[0].latitude]
+    center: [locations[0].longitude, locations[0].latitude]
 });
 map.on('load', function () {
     // Add a layer showing the places.
@@ -73,31 +85,31 @@ map.on('load', function () {
         }
     });
     map.addControl(new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken
- }));;
-map.addControl(new mapboxgl.NavigationControl());
-// When a click event occurs on a feature in the places layer, open a popup at the
-// location of the feature, with description HTML from its properties.
-map.on('click', 'places', function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice();
-    var description = e.features[0].properties.description;
-    // Ensure that if the map is zoomed out such that multiple
-    // copies of the feature are visible, the popup appears
-    // over the copy being pointed to.
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-    }
+    accessToken: mapboxgl.accessToken
+    }));;
+    map.addControl(new mapboxgl.NavigationControl());
+    // When a click event occurs on a feature in the places layer, open a popup at the
+    // location of the feature, with description HTML from its properties.
+        map.on('click', 'places', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
     new mapboxgl.Popup()
         .setLngLat(coordinates)
         .setHTML(description)
         .addTo(map);
-});
+    });
 // Change the cursor to a pointer when the mouse is over the places layer.
-map.on('mouseenter', 'places', function () {
-    map.getCanvas().style.cursor = 'pointer';
-});
+    map.on('mouseenter', 'places', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
 // Change it back to a pointer when it leaves.
-map.on('mouseleave', 'places', function () {
-    map.getCanvas().style.cursor = '';
-});
+    map.on('mouseleave', 'places', function () {
+        map.getCanvas().style.cursor = '';
+    });
 });
