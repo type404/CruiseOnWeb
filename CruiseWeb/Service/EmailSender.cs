@@ -22,7 +22,7 @@ namespace CruiseWeb.Service
         }
 
         // Please use your API KEY here.
-        private const String API_KEY = "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";
+        private const String API_KEY = "XXXXXXX";
 
         static async Task Execute(String subject, String contents)
         {
