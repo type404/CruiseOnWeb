@@ -6,7 +6,7 @@
 * @author Jian Liew <jian.liew@monash.edu>
 */
 
-const TOKEN = "pk.eyJ1IjoidG0wNzEzIiwiYSI6ImNrMWQ3bnhxdzA1Y2UzaG51NmhvamkxNTMifQ.LOChEHSX_jHKaXLJdE5mAw";
+const TOKEN = "XXXXXXXXX";
 var initialLocations = [];
 var locations = [];
 
